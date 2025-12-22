@@ -5,6 +5,7 @@ import React, { ReactNode } from "react";
 import { FaRegLightbulb } from "react-icons/fa";
 import { inputOption } from "../SelectInput/option";
 import SelectInput from "../SelectInput/SelectInput";
+import Calendar from "../Calendar/Calendar";
 export function Form() {
   
   const appOption: inputOption[] = [
@@ -36,6 +37,8 @@ export function Form() {
         lable="Select an option"
         initialValue=""
       />
+
+      <Calendar/>
     </form>
   );
 }
