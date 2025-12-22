@@ -2,7 +2,7 @@ export interface inputOption {
   value: string;
   label: string;
 }
-export interface selectOption {
+export interface DropdownProps {
   options: inputOption[];
   lable?: string;
   initialValue?: string;
