@@ -1,0 +1,111 @@
+@import "../../styles/variables";
+
+.checkboxWrapper {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  gap: $spacing-sm;
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.checkboxInput {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkboxCustom {
+  width: 20px;
+  height: 20px;
+  border: 2px solid $gray;
+  border-radius: 4px;
+  background-color: $background;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+
+  svg {
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.2s ease;
+    color: white;
+    font-size: 14px;
+  }
+}
+
+.checkboxInput:checked ~ .checkboxCustom {
+  background-color: $orange;
+  border-color: $orange;
+
+  svg {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.checkboxInput:not(:disabled) ~ .checkboxCustom:hover {
+  border-color: $orange-hover;
+}
+
+.checkboxInput:disabled ~ .checkboxCustom {
+  background-color: $gray-disabled;
+  border-color: $gray-disabled;
+  cursor: not-allowed;
+}
+
+.checkboxLabel {
+  font-size: $font-base;
+  color: $text-color;
+  font-weight: 500;
+  cursor: pointer;
+
+  .disabled & {
+    cursor: not-allowed;
+    color: $gray;
+  }
+}
+
+// CheckboxGroup Styles
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  width: 100%;
+}
+
+.groupLabel {
+  font-size: $font-base;
+  color: $text-color;
+  font-weight: 600;
+  margin-bottom: $spacing-xs;
+}
+
+.checkboxList {
+  display: flex;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+
+  &.vertical {
+    flex-direction: column;
+  }
+
+  &.horizontal {
+    flex-direction: row;
+  }
+}
+
+.errorMessage {
+  font-size: $font-sm;
+  color: $error-color;
+  margin-top: $spacing-xs;
+}
