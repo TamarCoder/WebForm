@@ -1,4 +1,5 @@
 @import "../../styles/variables";
+
 .MainContainer {
   display: flex;
   flex-direction: column;
@@ -6,43 +7,47 @@
   max-width: 850px;
   width: 100%;
   border-radius: 20px;
-  padding: $spacing-lg;
+  padding: $spacing-lg $spacing-lg 40px;
   background-color: $background;
   gap: 20px;
+  min-height: fit-content;
 }
+
 .header {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
+
+  &Top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &Content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
 }
 
-.headerTop {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+.heading {
+  font-size: 25px;
+  font-weight: 700;
+  color: $text-color;
 }
+
 .headline {
   font-size: 18px;
   font-weight: 600;
   color: $text-color;
 }
 
-.headerContent {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-}
-.heading {
-  font-size: 25px;
-  font-weight: 700;
-  color: $text-color;
-}
 .signUp {
   font-size: 18px;
   font-weight: 600;
@@ -54,16 +59,16 @@
   gap: 8px;
   align-items: center;
 }
+
 .activeStep {
   display: flex;
+  align-items: center;
+  justify-content: center;
   width: 30px;
   height: 30px;
   border-radius: 50%;
   background-color: $gray;
-  justify-content: center;
   color: #fff;
-  display: flex;
-  align-items: center;
 }
 
 .line {
@@ -77,6 +82,8 @@
   width: 100%;
   background-color: $background;
   padding: $spacing-lg;
+  border-radius: 20px;
+  min-height: fit-content;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -89,6 +96,7 @@
   justify-content: space-between;
   gap: 20px;
 }
+
 .Inputdetails {
   flex: 1;
   display: flex;
@@ -101,7 +109,6 @@
   height: 150px;
   border: 2px dashed $gray;
   background-color: $orange;
-  border-radius: 10px;
   border-radius: 100px;
   display: flex;
   align-items: center;
@@ -113,31 +120,12 @@
   color: #fff;
 }
 
-.locations {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-
-  > div {
-    flex: 1;
-  }
-}
-.workInfo {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-
-  > div {
-    flex: 1;
-  }
-}
-
+// Shared styles for sections with 2 columns
+.locations,
+.workInfo,
 .date {
   width: 100%;
   display: flex;
-  align-items: center;
   gap: 20px;
 
   > div {
@@ -145,12 +133,19 @@
   }
 }
 
+.locations,
+.workInfo {
+  align-items: center;
+}
+
+.date {
+  align-items: flex-start;
+}
+
 .additional {
-  .messageContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
   .messageLabel {
     font-size: 14px;
@@ -191,7 +186,8 @@
   border-radius: 20px;
   gap: 10px;
 }
-.educationInputs{
+
+.educationInputs {
   display: flex;
   align-items: center;
   gap: 20px;
@@ -199,4 +195,22 @@
   > div {
     flex: 1;
   }
+}
+
+.educationButtons {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  > div {
+    flex: 1;
+  }
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
 }
