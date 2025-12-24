@@ -46,10 +46,8 @@ export function Form() {
           console.log("selected date:", date);
         }}
       />
-
        <Button    title="Submit" variants="primary" size="medium" type="button" children />
        <Button    title="Button" variants="secondary" size="medium" type="button" children />
-
     </form>
   );
 }
