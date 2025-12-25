@@ -15,6 +15,7 @@ import { InferType } from "yup";
 import { formSchema } from "./formShcema";
 import { EmailSection } from "../EmailSection/EmailSection";
 import { SummarySection } from "../SummarySection/SummarySection";
+import { SignIn } from "../SignIn/SignIn";
 
 type FormValues = InferType<typeof formSchema>;
 
@@ -43,6 +44,7 @@ export function Form() {
   const [currentStep, setCurrentStep] = React.useState(1);
   const [savedFormData, setSavedFormData] = React.useState<FormValues | null>(null);
   const [emailData, setEmailData] = React.useState<{email: string; password: string; repeatEmail: string} | null>(null);
+  const [showSignIn, setShowSignIn] = React.useState(false);
 
   const onSubmit = (data: FormValues) => {
     setSavedFormData(data);
@@ -74,15 +76,19 @@ export function Form() {
 
   return (
     <section className={styles.MainContainer}>
-      <div className={styles.header}>
-        <div className={styles.headerTop}>
-          <p className={styles.headline}>
-            Already a Member?{" "}
-            <a href="#" className={styles.signUp}>
-              Sign In
-            </a>
-          </p>
-        </div>
+      {showSignIn ? (
+        <SignIn />
+      ) : (
+        <>
+          <div className={styles.header}>
+            <div className={styles.headerTop}>
+              <p className={styles.headline}>
+                Already a Member?{" "}
+                <a href="#" className={styles.signUp} onClick={(e) => { e.preventDefault(); setShowSignIn(true); }}>
+                  Sign In
+                </a>
+              </p>
+            </div>
         <div className={styles.headerContent}>
           <h1 className={styles.heading}>Sign Up</h1>
           <div className={styles.steps}>
@@ -282,8 +288,8 @@ export function Form() {
           />
         </div>
       )}
-
-  
+        </>
+      )}
     </section>
   );
 }

@@ -1,0 +1,88 @@
+@import "../../styles/variables";
+
+.MainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 850px;
+  width: 100%;
+  border-radius: 20px;
+  padding: $spacing-lg $spacing-lg 40px;
+  background-color: $background;
+  gap: 20px;
+  min-height: fit-content;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.heading {
+  font-size: 32px;
+  font-weight: 700;
+  color: $text-color;
+}
+
+.subheading {
+  font-size: 16px;
+  font-weight: 400;
+  color: #666;
+}
+
+.formContainer {
+  max-width: 850px;
+  width: 100%;
+  background-color: $background;
+  padding: $spacing-lg;
+  border-radius: 20px;
+  min-height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.forgotPassword {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -10px;
+
+  a {
+    font-size: 14px;
+    color: $orange;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.submitButton {
+  margin-top: 10px;
+}
+
+.signUpLink {
+  text-align: center;
+  margin-top: 10px;
+
+  p {
+    font-size: 14px;
+    color: $text-color;
+
+    a {
+      color: $orange;
+      text-decoration: none;
+      font-weight: 600;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
