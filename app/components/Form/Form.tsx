@@ -125,6 +125,7 @@ export function Form() {
             </div>
           </div>
         </section>
+        <Button variants="primary"  title="Submit" className={styles.submitButton}>Save and Continue</Button>
       </form>
     </section>
   );
