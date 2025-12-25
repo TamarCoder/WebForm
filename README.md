@@ -1,33 +1,35 @@
-# 📝 Multi-Step Registration Form
+# � WebForm - Multi-Step Registration Form
 
-[🇬🇪 ქართული](./README.ka.md) | **🇬🇧 English**
+[![Next.js](https://img.shields.io/badge/Next.js-15.5.0-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-19.0-61dafb)](https://react.dev/)
+[![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 
-A modern, fully responsive multi-step registration form built with Next.js, TypeScript, and React Hook Form.
+> A modern, fully responsive multi-step registration form with comprehensive validation and bilingual documentation (English & Georgian).
 
-![Next.js](https://img.shields.io/badge/Next.js-15.5.0-black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
-![React](https://img.shields.io/badge/React-19.0-61dafb)
-![License](https://img.shields.io/badge/license-MIT-green)
+[🇬🇪 ქართული დოკუმენტაცია](./README.ka.md)
 
 ---
 
 ## ✨ Features
 
-- 🎨 **Modern UI/UX** - Clean and intuitive design
+- 🎨 **Modern UI/UX** - Clean and intuitive design with orange theme
 - 📱 **Fully Responsive** - Works seamlessly on all devices
 - 🔐 **Form Validation** - Powered by Yup schema validation
-- 🎯 **Multi-Step Process** - 3-step registration flow
+- 🎯 **Multi-Step Process** - 3-step registration flow with progress indicators
 - 🌐 **Sign In/Sign Up** - Complete authentication UI
 - ♿ **Accessible** - WCAG compliant components
-- 🎭 **Reusable Components** - Modular and maintainable code
+- 🎭 **Reusable Components** - Modular and maintainable code architecture
 - 🚀 **TypeScript** - Type-safe development
+- 📚 **Bilingual Documentation** - Complete docs in English and Georgian
 
 ---
 
 ## 🎬 Demo
 
-<!-- Add GIF here -->
-![Demo](./docs/demo.gif)
+![WebForm Demo](./docs/demo.gif)
+
+[🔗 Live Demo](https://webform-tamar.vercel.app) *(Coming soon)*
 
 ---
 
