@@ -99,6 +99,7 @@
 
 .Inputdetails {
   flex: 1;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -174,6 +175,10 @@
     &::placeholder {
       color: #999;
     }
+
+    &.error {
+      border: 1px solid red !important;
+    }
   }
 }
 
@@ -213,4 +218,143 @@
   align-items: center;
   gap: 10px;
   margin-top: 30px;
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .MainContainer {
+    padding: $spacing-md;
+    max-width: 100%;
+    border-radius: 15px;
+  }
+
+  .heading {
+    font-size: 20px;
+  }
+
+  .headline {
+    font-size: 16px;
+  }
+
+  .signUp {
+    font-size: 16px;
+  }
+
+  .line {
+    width: 80px;
+  }
+
+  .activeStep {
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+  }
+
+  .formContainer {
+    padding: $spacing-md;
+    border-radius: 15px;
+  }
+
+  .basicInfo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .photo {
+    width: 120px;
+    height: 120px;
+    align-self: center;
+  }
+
+  .photoUpload {
+    font-size: 40px;
+  }
+
+  .locations,
+  .workInfo,
+  .date {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .educationInputs,
+  .educationButtons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .actionButtons {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    button {
+      flex: 1;
+    }
+  }
+
+  .education {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .MainContainer {
+    padding: $spacing-sm;
+    border-radius: 10px;
+  }
+
+  .heading {
+    font-size: 18px;
+  }
+
+  .headline {
+    font-size: 14px;
+  }
+
+  .signUp {
+    font-size: 14px;
+  }
+
+  .headerTop {
+    justify-content: center;
+  }
+
+  .line {
+    width: 50px;
+  }
+
+  .activeStep {
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+  }
+
+  .formContainer {
+    padding: $spacing-sm;
+    border-radius: 10px;
+  }
+
+  .photo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .photoUpload {
+    font-size: 35px;
+  }
+
+  .education {
+    padding: 10px;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 15px;
+
+    button {
+      width: 100%;
+    }
+  }
 }

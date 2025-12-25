@@ -12,6 +12,7 @@ const Calendar: React.FC<CalendarProps> = ({
   className,
   style,
   onDatechange,
+  error,
 }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(
     initialDate || null
@@ -163,7 +164,7 @@ const Calendar: React.FC<CalendarProps> = ({
       <label className={styles.label}>{label}</label>
 
       <div className={styles.calendarWrapper}>
-        <div className={styles.dateInput} onClick={() => setIsOpen(!isOpen)}>
+        <div className={`${styles.dateInput} ${isOpen ? styles.open : ""} ${error ? styles.error : ""}`} onClick={() => setIsOpen(!isOpen)}>
           <span className={styles.selectedText}>
             {formatDate(selectedDate)}
           </span>

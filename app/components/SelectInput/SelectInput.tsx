@@ -7,6 +7,7 @@ const SelectInput: React.FC<DropdownProps> = ({
   options,
   lable,
   initialValue,
+  error,
 }) => {
   const [selectedValue, setSelectedValue] = useState<string>(
     initialValue || options[0]?.value || ""
@@ -36,7 +37,7 @@ const SelectInput: React.FC<DropdownProps> = ({
       <label className={styles.label}>{lable}</label>
       <div className={styles.selectWrapper}>
         <div
-          className={`${styles.select} ${isOpen ? styles.open : ""}`}
+          className={`${styles.select} ${isOpen ? styles.open : ""} ${error ? styles.error : ""}`}
           onClick={() => setIsOpen(!isOpen)}
         >
           <span className={styles.selectedText}>

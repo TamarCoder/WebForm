@@ -31,6 +31,10 @@
   &.withRightIcon {
     padding-right: 60px;
   }
+
+  &.error {
+    border-color: red !important;
+  }
 }
 .label {
   font-size: $font-base;
@@ -74,6 +78,10 @@
     border: 2px solid $orange-hover;
     box-shadow: $shadow-orange;
   }
+
+  &.error {
+    border-color: red !important;
+  }
 }
 
 .fillInput {
@@ -82,4 +90,8 @@
   border-radius: 20px;
   background-color: $text-light;
   border: none;
+
+  &.error {
+    border: 1px solid red !important;
+  }
 }

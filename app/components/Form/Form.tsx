@@ -1,40 +1,46 @@
 "use client";
-import React, { useState } from "react";
-import { FieldValues } from "react-hook-form";
+import React from "react";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { MdAddAPhoto } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import styles from "./Form.module.scss";
-import { inputOption } from "../SelectInput/option";
 import { Input } from "../Input/Input";
 import SelectInput from "../SelectInput/SelectInput";
 import Calendar from "../Calendar/Calendar";
 import { CheckboxGroup } from "../Checkbox/Checkbox";
 import Button from "../Button/Button";
+import { APP_OPTIONS, GENDER_OPTIONS } from "./form.type";
+import { InferType } from "yup";
+import { formSchema } from "./formShcema";
 
-const APP_OPTIONS: inputOption[] = [
-  { value: "option1", label: "Option 1" },
-  { value: "option2", label: "Option 2" },
-  { value: "option3", label: "Option 3" },
-];
-
-const GENDER_OPTIONS = [
-  { value: "male", label: "Male" },
-  { value: "female", label: "Female" },
-  { value: "other", label: "Other" },
-];
+type FormValues = InferType<typeof formSchema>;
 
 export function Form() {
-  const [selectDate, setSelectDate] = useState<Date | null>(null);
-  const [selectedGender, setSelectedGender] = useState<string[]>([]);
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: yupResolver(formSchema),
+    defaultValues: {
+      fullName: "",
+      constituency: "",
+      dateOfBirth: new Date(),
+      workInfo: "",
+      position: "",
+      gender: "",
+      message: "",
+      degree: "",
+      institution: "",
+      graduationDate: new Date(),
+    },
+  });
 
-  const handleDateChange = (date: Date) => {
-    setSelectDate(date);
-    console.log("selected date:", date);
-  };
-
-  const handleGenderChange = (values: string[]) => {
-    setSelectedGender(values);
-    console.log("Selected gender:", values);
+  const onSubmit = (data: FormValues) => {
+    console.log("Form Data:", data);
+    // აქ შეგიძლიათ გააგზავნოთ მონაცემები API-ზე
   };
 
   return (
@@ -43,11 +49,13 @@ export function Form() {
         <div className={styles.headerTop}>
           <p className={styles.headline}>
             Already a Member?{" "}
-            <a href="#" className={styles.signUp}>Sign Up</a>
+            <a href="#" className={styles.signUp}>
+              Sign Up
+            </a>
           </p>
         </div>
         <div className={styles.headerContent}>
-          <h1 className={styles.heading}>Sing Up</h1>
+          <h1 className={styles.heading}>Sign Up</h1>
           <div className={styles.steps}>
             {[1, 2, 3].map((step, index) => (
               <React.Fragment key={step}>
@@ -59,16 +67,18 @@ export function Form() {
         </div>
       </div>
 
-      <form className={styles.formContainer}>
+      <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
         <section className={styles.basicInfo}>
           <div className={styles.Inputdetails}>
             <h2 className={styles.headline}>Basic Details</h2>
-            <Input<FieldValues>
+            <Input
               label="Full Name"
               name="fullName"
               type="text"
               placeholder="Enter your full name"
               className="outlineInput"
+              register={register}
+              error={errors.fullName?.message}
             />
           </div>
           <div className={styles.photo}>
@@ -77,8 +87,9 @@ export function Form() {
             </a>
           </div>
         </section>
+
         <section className={styles.locations}>
-          <Input<FieldValues>
+          <Input
             label="Constituency"
             name="constituency"
             type="text"
@@ -86,46 +97,122 @@ export function Form() {
             className="fillInput"
             iconPosition="right"
             icon={<FaLocationDot />}
+            register={register}
+            error={errors.constituency?.message}
           />
         </section>
+
         <section className={styles.workInfo}>
-          <SelectInput options={APP_OPTIONS} lable="Select Party you work for" initialValue="" />
-          <SelectInput options={APP_OPTIONS} lable="Position" initialValue="" />
-        </section>
-        <section className={styles.date}>
-          <Calendar onChange={handleDateChange} />
-          <CheckboxGroup<FieldValues>
-            name="gender"
-            label="Gender"
-            options={GENDER_OPTIONS}
-            selectedValues={selectedGender}
-            onChange={handleGenderChange}
-            direction="horizontal"
+          <Controller
+            name="workInfo"
+            control={control}
+            render={({ field }) => (
+              <SelectInput
+                options={APP_OPTIONS}
+                lable="Select Party you work for"
+                initialValue=""
+                error={errors.workInfo?.message}
+              />
+            )}
+          />
+
+          <Controller
+            name="position"
+            control={control}
+            render={({ field }) => (
+              <SelectInput
+                options={APP_OPTIONS}
+                lable="Position"
+                initialValue=""
+                error={errors.position?.message}
+              />
+            )}
           />
         </section>
+
+        <section className={styles.date}>
+          <Controller
+            name="dateOfBirth"
+            control={control}
+            render={({ field }) => <Calendar onChange={field.onChange} error={errors.dateOfBirth?.message} />}
+          />
+
+          <Controller
+            name="gender"
+            control={control}
+            render={({ field }) => (
+              <CheckboxGroup
+                name="gender"
+                label="Gender"
+                options={GENDER_OPTIONS}
+                selectedValues={field.value ? [field.value] : []}
+                onChange={(values) => field.onChange(values[0])}
+                direction="horizontal"
+              />
+            )}
+          />
+        </section>
+
         <section className={styles.additional}>
           <label className={styles.messageLabel}>Message</label>
           <textarea
-            className={styles.messageInput}
+            className={`${styles.messageInput} ${errors.message ? styles.error : ""}`}
             placeholder="Enter your message"
             rows={8}
+            {...register("message")}
           />
         </section>
+
         <section className={styles.education}>
           <h2 className={styles.headline}>Education</h2>
           <div className={styles.educationInputs}>
-            <Input<FieldValues> label="Degree" name="degree" type="text" placeholder="Enter your degree" className="outlineInput" />
-            <Input<FieldValues> label="Institution" name="institution" type="text" placeholder="Enter your institution" className="outlineInput" />
+            <Input
+              label="Degree"
+              name="degree"
+              type="text"
+              placeholder="Enter your degree"
+              className="outlineInput"
+              register={register}
+              error={errors.degree?.message}
+            />
+            <Input
+              label="Institution"
+              name="institution"
+              type="text"
+              placeholder="Enter your institution"
+              className="outlineInput"
+              register={register}
+              error={errors.institution?.message}
+            />
           </div>
           <div className={styles.educationButtons}>
-            <Calendar label="Gradutation Year" onChange={handleDateChange} />
+            <Controller
+              name="graduationDate"
+              control={control}
+              render={({ field }) => (
+                <Calendar label="Graduation Year" onChange={field.onChange} error={errors.graduationDate?.message} />
+              )}
+            />
+
             <div className={styles.actionButtons}>
-              <Button variants="secondary" title="Cancel">Cancel</Button>
-              <Button variants="primary" title="Save">Save</Button>
+              <Button variants="secondary" title="Cancel" type="button">
+                Cancel
+              </Button>
+              <Button variants="primary" title="Save" type="button">
+                Save
+              </Button>
             </div>
           </div>
         </section>
-        <Button variants="primary"  title="Submit" className={styles.submitButton}>Save and Continue</Button>
+
+        <Button
+          variants="primary"
+          title="Submit"
+          className={styles.submitButton}
+          type="submit"
+        >
+          Save and Continue
+        </Button>
       </form>
     </section>
   );

@@ -5,6 +5,7 @@ import { InputProps } from "./input.type";
 import { FieldValues, Path } from "react-hook-form";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
+ 
 export const Input = <TFormValues extends FieldValues = FieldValues>({
   type,
   name,

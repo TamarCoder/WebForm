@@ -7,4 +7,5 @@ interface CalendarProps {
   className?: string;
   style? : React.CSSProperties;
   onDatechange?: (date: Date | null) => void;
+  error?: string;
 }
