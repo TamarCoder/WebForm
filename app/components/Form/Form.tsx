@@ -14,6 +14,7 @@ import { PROGRAMMING_FIELD_OPTIONS, EXPERIENCE_LEVEL_OPTIONS, GENDER_OPTIONS } f
 import { InferType } from "yup";
 import { formSchema } from "./formShcema";
 import { EmailSection } from "../EmailSection/EmailSection";
+import { SummarySection } from "../SummarySection/SummarySection";
 
 type FormValues = InferType<typeof formSchema>;
 
@@ -44,17 +45,13 @@ export function Form() {
   const [emailData, setEmailData] = React.useState<{email: string; password: string; repeatEmail: string} | null>(null);
 
   const onSubmit = (data: FormValues) => {
-    console.log("First Form Data:", data);
-    console.log("Form submitted successfully!");
-    // შევინახოთ პირველი ფორმის მონაცემები
     setSavedFormData(data);
-    setCurrentStep(2); // გადავდივართ ეტაპ 2-ზე
+    setCurrentStep(2);
   };
 
   const handleEmailSubmit = (data: {email: string; password: string; repeatEmail: string}) => {
-    console.log("Email Section Data:", data);
     setEmailData(data);
-    setCurrentStep(3); // გადავდივართ ეტაპ 3-ზე (Summary)
+    setCurrentStep(3);
   };
 
   const handleBack = () => {
@@ -73,12 +70,7 @@ export function Form() {
     // აქ შეგიძლიათ გააგზავნოთ მონაცემები API-ზე
   };
 
-  // ვუყურებთ errors-ს
-  React.useEffect(() => {
-    if (Object.keys(errors).length > 0) {
-      console.log("Form Errors:", errors);
-    }
-  }, [errors]);
+
 
   return (
     <section className={styles.MainContainer}>
@@ -185,7 +177,13 @@ export function Form() {
           <Controller
             name="dateOfBirth"
             control={control}
-            render={({ field }) => <Calendar onChange={field.onChange} error={errors.dateOfBirth?.message} />}
+            render={({ field }) => (
+              <Calendar 
+                label="Work Start Date"
+                onChange={field.onChange} 
+                error={errors.dateOfBirth?.message} 
+              />
+            )}
           />
 
           <Controller
@@ -276,42 +274,16 @@ export function Form() {
 
       {currentStep === 3 && savedFormData && emailData && (
         <div className={styles.formContainer}>
-            <h2 className={styles.headline}>Summary - Review Your Information</h2>
-            
-            <div className={styles.summaryCard}>
-              <h3>Basic Information</h3>
-              <p><strong>Full Name:</strong> {savedFormData.fullName}</p>
-              <p><strong>Constituency:</strong> {savedFormData.constituency}</p>
-              <p><strong>Date of Birth:</strong> {new Date(savedFormData.dateOfBirth).toLocaleDateString()}</p>
-              <p><strong>Programming Field:</strong> {savedFormData.workInfo}</p>
-              <p><strong>Experience Level:</strong> {savedFormData.position}</p>
-              <p><strong>Gender:</strong> {savedFormData.gender}</p>
-              <p><strong>Message:</strong> {savedFormData.message}</p>
-            </div>
-
-            <div className={styles.summaryCard}>
-              <h3>Education</h3>
-              <p><strong>Degree:</strong> {savedFormData.degree}</p>
-              <p><strong>Institution:</strong> {savedFormData.institution}</p>
-              <p><strong>Graduation Date:</strong> {new Date(savedFormData.graduationDate).toLocaleDateString()}</p>
-            </div>
-
-            <div className={styles.summaryCard}>
-              <h3>Account Information</h3>
-              <p><strong>Email:</strong> {emailData.email}</p>
-              <p><strong>Password:</strong> ••••••••</p>
-            </div>
-
-            <div className={styles.actionButtons}>
-              <Button variants="secondary" title="Back" type="button" onClick={handleBack}>
-                Back
-              </Button>
-              <Button variants="primary" title="Submit" type="button" onClick={handleFinalSubmit}>
-                Complete Registration
-              </Button>
-            </div>
+          <SummarySection 
+            formData={savedFormData}
+            emailData={emailData}
+            onBack={handleBack}
+            onSubmit={handleFinalSubmit}
+          />
         </div>
       )}
+
+  
     </section>
   );
 }

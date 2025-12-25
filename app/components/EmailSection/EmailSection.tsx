@@ -34,9 +34,7 @@ export function EmailSection({ onSubmit: handleEmailSubmit, onBack }: EmailSecti
 
   
   const onSubmit = (data: EmailFormData) => {
-    console.log("Email Section Data:", data);
-    console.log("Email Section submitted successfully!");
-    handleEmailSubmit(data); // გადავცემთ მონაცემებს parent-ს
+    handleEmailSubmit(data);
   }
 
   return (
@@ -63,16 +61,16 @@ export function EmailSection({ onSubmit: handleEmailSubmit, onBack }: EmailSecti
           error={errors.password?.message}
         />
         <Input
-          label="Repeat Email"
+          label="Repeat Password"
           name="repeatEmail"
           type="password"
-          placeholder="Enter your password again"
+          placeholder="Confirm your password"
           icon={<AiOutlineLock />}
           iconPosition="left"
           register={register}
           error={errors.repeatEmail?.message}
         />
-        <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
+        <div className={styles.buttonGroup}>
           <Button variants="secondary" title="Back" type="button" onClick={onBack}>
             Back
           </Button>

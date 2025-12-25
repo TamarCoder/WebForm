@@ -1,10 +1,13 @@
-import { object, string, number, date, InferType, ref } from 'yup';
-
+import { object, string, ref } from 'yup';
 
 export const formSchema = object({
-     email: string().email().required('Email is required'),
-     password: string().min(6).required('Password is required'),
-     repeatEmail: string()
-       .oneOf([ref('password')], 'Password must match')
-       .required('Please confirm your password'),
-})      
+  email: string()
+    .email('Please enter a valid email address')
+    .required('Email is required'),
+  password: string()
+    .min(6, 'Password must be at least 6 characters')
+    .required('Password is required'),
+  repeatEmail: string()
+    .oneOf([ref('password')], 'Passwords must match')
+    .required('Please confirm your password'),
+});      
