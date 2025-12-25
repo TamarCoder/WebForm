@@ -68,11 +68,11 @@ export const Input = <TFormValues extends FieldValues = FieldValues>({
             aria-label={showPassword ? "Hide password" : "Show password"}
           >
             {showPassword ? (
-              <AiOutlineEyeInvisible className={styles.icon} />
-            ) : (
               <AiOutlineEye className={styles.icon} />
+            ) : (
+              <AiOutlineEyeInvisible className={styles.icon} />
             )}
-          </button>
+          </button>  
         )}
       </div>
       {error && <div className={styles.errorMessage}>{error}</div>}

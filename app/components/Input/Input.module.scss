@@ -65,6 +65,34 @@
   justify-content: center;
 }
 
+.passwordToggle {
+  position: absolute;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: $text-color;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $orange;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+}
+
 //  custom classes
 
 .outlineInput {

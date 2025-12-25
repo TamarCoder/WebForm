@@ -8,13 +8,16 @@ const SelectInput: React.FC<DropdownProps> = ({
   lable,
   initialValue,
   error,
+  onChange,
+  value,
 }) => {
   const [selectedValue, setSelectedValue] = useState<string>(
     initialValue || options[0]?.value || ""
   );
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const selectedOption = options.find((opt) => opt.value === selectedValue);
+  const currentValue = value !== undefined ? value : selectedValue;
+  const selectedOption = options.find((opt) => opt.value === currentValue);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -27,9 +30,12 @@ const SelectInput: React.FC<DropdownProps> = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleSelect = (value: string) => {
-    setSelectedValue(value);
+  const handleSelect = (newValue: string) => {
+    setSelectedValue(newValue);
     setIsOpen(false);
+    if (onChange) {
+      onChange(newValue);
+    }
   };
 
   return (
@@ -51,11 +57,11 @@ const SelectInput: React.FC<DropdownProps> = ({
               <div
                 key={option.value}
                 className={`${styles.option} ${
-                  option.value === selectedValue ? styles.selected : ""
+                  option.value === currentValue ? styles.selected : ""
                 }`}
                 onClick={() => handleSelect(option.value)}
               >
-                {option.value === selectedValue && (
+                {option.value === currentValue && (
                   <span className={styles.checkmark}>✓</span>
                 )}
                 {option.label}

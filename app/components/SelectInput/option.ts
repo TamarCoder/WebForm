@@ -7,6 +7,8 @@ export interface DropdownProps {
   lable?: string;
   initialValue?: string;
   error?: string;
+  onChange?: (value: string) => void;
+  value?: string;
 }
 
  

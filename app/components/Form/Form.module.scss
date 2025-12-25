@@ -60,7 +60,7 @@
   align-items: center;
 }
 
-.activeStep {
+.inactiveStep {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,12 +69,30 @@
   border-radius: 50%;
   background-color: $gray;
   color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.activeStep {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: $orange;
+  color: #fff;
+  transition: background-color 0.3s ease;
 }
 
 .line {
   width: 200px;
   height: 2px;
   background-color: $gray;
+  transition: background-color 0.3s ease;
+}
+
+.activeLine {
+  background-color: $orange;
 }
 
 .formContainer {
